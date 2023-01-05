@@ -34,10 +34,15 @@ inputName.addEventListener("keypress", function (event) {
 
 addBookmarkBttn.addEventListener("click", () => {
   const userInput = getBookmark();
-  userInput.push({ url: inputURL.value, name: inputName.value });
-  inputURL.value = "";
-  inputName.value = "";
-  renderAllBookmarks(userInput);
+  if (inputURL.value !== "" && inputName.value !== "") {
+    userInput.push({ url: inputURL.value, name: inputName.value });
+    inputURL.value = "";
+    inputName.value = "";
+    renderAllBookmarks(userInput);
+  } else {
+    inputURL.value = "";
+    inputName.value = "";
+  }
 });
 
 const removeBookmark = (bookmarks, bookmark) => {
