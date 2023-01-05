@@ -1,0 +1,43 @@
+<!-- Two text fields: one where the user inputs the link that the bookmark is saving, and one where the user inputs the name of the bookmark.
+A button the user can click on to add the bookmark.
+A list that shows all of the user's added bookmarks.
+This list should start off empty. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookmark Manager</title>
+  </head>
+  <body>
+    <main class="bookmark-manager">
+      <section class="bookmark-ui">
+        <label for="url">URL:</label>
+        <input
+          class="input-url"
+          type="url"
+          name="url"
+          placeholder="e.g. https://github.com"
+          required
+        />
+        <label for="name">Name:</label>
+        <input
+          class="input-name"
+          type="text"
+          name="name"
+          placeholder="e.g. Bookmark 1"
+          required
+        />
+        <input type="button" class="add-button" value="Add" />
+      </section>
+      <section class="bookmark-list">
+        <ul>
+            
+        </ul>
+      </section>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>
