@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: rgb(187, 187, 187);
+}
+
+li{
+    list-style: none;
+}
+
+.bookmark-ui{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 4rem 0;
+    font-family: sans-serif;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-button {
+    font-family: sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: blue;
+    background-color: aliceblue;
+    border: 0;
+    box-shadow: 0px 1px 15px darkblue;
+
+}
+
+.bookmark-list{
+    position: relative;
+    left: 25%;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+}
+
+.bookmark-list button{
+    margin: 0 1rem 1rem 0;
+    font-family: sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: red;
+    background-color: rgb(255, 242, 240);
+    border: 0;
+    box-shadow: 0px 0px 7px darkred;
+}
+
