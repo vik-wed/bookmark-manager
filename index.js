@@ -11,28 +11,44 @@
 // Can you correctly add bookmarks?
 // What UI element allows a user to remove a previously added bookmark?
 // How can you make sure that the correct bookmark is removed?
+const useState = (initial) => {
+  let closure = initial;
+  const getState = () => closure;
+  const setState = (update) => (closure = update);
+  return [getState, setState];
+};
 
-let userInput = [];
+const [getBookmark, setBookmark] = useState([]);
+
+// let userInput = getBookmark();
 const addBookmarkBttn = document.querySelector(".add-button");
 const inputURL = document.querySelector(".input-url");
 const inputName = document.querySelector(".input-name");
 
+inputName.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    addBookmarkBttn.click();
+  }
+});
+
 addBookmarkBttn.addEventListener("click", () => {
+  const userInput = getBookmark();
   userInput.push({ url: inputURL.value, name: inputName.value });
   inputURL.value = "";
   inputName.value = "";
   renderAllBookmarks(userInput);
 });
 
-const removeBookmark = (userInput, bookmark) => {
+const removeBookmark = (bookmarks, bookmark) => {
   // Can you find the book?
-  const idx = userInput.indexOf(bookmark);
+  const idx = bookmarks.indexOf(bookmark);
   if (idx !== -1) {
     // If the book was found, remove it
-    return userInput.slice(0, idx).concat(userInput.slice(idx + 1));
+    return bookmarks.slice(0, idx).concat(bookmarks.slice(idx + 1));
   } else {
     // Otherwise, it's the same bookshelf
-    return userInput;
+    return bookmarks;
   }
 };
 
@@ -46,14 +62,15 @@ const renderBookmark = (bookmark) => {
   link.href = `${bookmark.url}`;
   link.target = "_blank";
   link.textContent = `${bookmark.name}`;
-  
 
   const removeBtn = document.createElement("button");
   removeBtn.textContent = "-";
   removeBtn.addEventListener("click", () => {
-    const updatedBookmarks = removeBookmark(userInput, bookmark);
-    userInput = updatedBookmarks;
-    renderAllBookmarks(userInput);
+    const bookmarks = getBookmark();
+    const updatedBookmarks = removeBookmark(bookmarks, bookmark);
+    // userInput = updatedBookmarks;
+    setBookmark(updatedBookmarks);
+    renderAllBookmarks();
   });
 
   li.append(link);
@@ -61,10 +78,10 @@ const renderBookmark = (bookmark) => {
   return li;
 };
 
-const renderAllBookmarks = (userInput) => {
+const renderAllBookmarks = () => {
   const ul = document.querySelector("ul");
-
-  const renderedBookmarks = userInput.map(renderBookmark);
+  const bookmarks = getBookmark();
+  const renderedBookmarks = bookmarks.map(renderBookmark);
   ul.replaceChildren(...renderedBookmarks);
 
   return ul;
